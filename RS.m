@@ -30,8 +30,9 @@ for i_step = 1:n_step;
 	if i_step == 1;
 		step_table(i_step,2) = min_z + floor(rand(1)*(range_z + round_lim));	
 	else
-		while step_table(i_step,2)==step_table(i_step-1,2)	% ensure next step has a new z
-			step_table(i_step,2) = min_z + floor(rand(1)*(range_z + round_lim));
+		step_table(i_step,2) = min_z + floor(rand(1)*(range_z + round_lim));
+		while 	step_table(i_step,2) == step_table(i_step-1,2);	% ensure next step has a new z
+				step_table(i_step,2) = min_z + floor(rand(1)*(range_z + round_lim));
 		end
 	end
 	
