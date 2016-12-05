@@ -5,8 +5,8 @@ function [Z, step_table] = RS(n_sam, min_z, max_z, min_l, max_l)
 	% minimum and maximum step lengths [min_l] and [max_l]
 	
 Z = zeros(n_sam,1); 
-range_z = abs(max_z - min_z)	% step value range
-range_l = abs(max_l - min_l)	% step length range
+range_z = abs(max_z - min_z);	% step value range
+range_l = abs(max_l - min_l);	% step length range
 
 round_lim = 1 - 1e-15;	% rounding limit
 
@@ -43,4 +43,4 @@ for i_step = 1:n_step;
 		Z(bkmk+1:bkmk+step_table(i_step,1)) = step_table(i_step,2);	
 	end
 	bkmk = bkmk+step_table(i_step,1);
-end	
+end
