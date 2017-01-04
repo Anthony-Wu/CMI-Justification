@@ -122,7 +122,7 @@ for i_var = 1:n_var
 	legend('Actual','UNC');
 	xlabel('Coefficient number','FontWeight','bold') % x-axis label
 	ylabel('Value','FontWeight','bold') % y-axis label
-	xlim([1 n_coeff]);
+	xlim([0.5 nB_in(i_var)+0.5]);
 end
 
 % M2
@@ -144,7 +144,7 @@ for i_var = 1:n_var
 	legend('Actual','CON1');
 	xlabel('Coefficient number','FontWeight','bold') % x-axis label
 	ylabel('Value','FontWeight','bold') % y-axis label
-	xlim([1 n_coeff]);
+	xlim([0.5 nB_in(i_var)+0.5]);
 end
 
 % M3
@@ -166,7 +166,7 @@ for i_var = 1:n_var
 	legend('Actual','CON2');
 	xlabel('Coefficient number','FontWeight','bold') % x-axis label
 	ylabel('Value','FontWeight','bold') % y-axis label
-	xlim([1 n_coeff]);
+	xlim([0.5 nB_in(i_var)+0.5]);
 end
 
 % plot Yt_model
