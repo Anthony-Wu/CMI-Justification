@@ -51,17 +51,12 @@ A_M1{1} = [[A_M1nz{1}]' zeros(1,nA_in(1) - length(A_M1nz{1}))]';
 dt_M1 = zeros(1,n_var);			% specify a priori dead-time
 
 % Output Prediction
-if toggle_inc == 1;		% incremental model
-	% WaterMV's notation is slightly different and needs a shift in coefficeints by 1 to translate over
-	for i_var = 1:n_var
-		B_M1{i_var} = [0; [B_M1{i_var}(1:end-1)]];
-	end
-	[Yt_model_M1] = tf_ARX_pred_inc (Ut_model_i, A_M1, B_M1, dt_M1, Yt_model);
-	[Yv_model_M1] = tf_ARX_pred_inc (Uv_model_i, A_M1, B_M1, dt_M1, Yv_model);
-elseif toggle_inc == 0;	% absolute model
-	[Yt_model_M1] = tf_ARX_pred (Ut_model, A_M1, B_M1, dt_M1);
-	[Yv_model_M1] = tf_ARX_pred (Uv_model, A_M1, B_M1, dt_M1);
+% WaterMV's notation is slightly different and needs a shift in coefficeints by 1 to translate over
+for i_var = 1:n_var
+	B_M1{i_var} = [0; [B_M1{i_var}(1:end-1)]];
 end
+[Yt_model_M1] = tf_ARX_pred_inc (Ut_model_i, A_M1, B_M1, dt_M1, Yt_model);
+[Yv_model_M1] = tf_ARX_pred_inc (Uv_model_i, A_M1, B_M1, dt_M1, Yv_model);
 
 % Model accuracy
 if toggle_ascale == 1;	% if auto-scaling is used, convert to Eng units
@@ -78,7 +73,7 @@ end
 
 % M2: CON1: Constrained (quadprog, specify: K_sign)
 % set up constraints [B A]
-K_sign_M2 = [1 1 0];				% specify sign direction vector
+K_sign_M2 = [1 1 -1];				% specify sign direction vector
 min_phase_M2 = zeros(1,n_var+1);	% 0 = not minimum phase
 % dt_M2 = zeros(1,n_var);				% specify a priori dead-time
 dt_M2 = [10 5];				% specify a priori dead-time
@@ -88,15 +83,9 @@ nZ_M2 = [nB_M2 nA_in];
 [con_A_M2 con_b_M2] = CMI_con(nZ_M2, K_sign_M2, min_phase_M2);
 
 % Model Identification and Output Prediction
-if toggle_inc == 1;		% incremental model
-	[B_M2 A_M2] = QP_ARX_MISO (Ut_model_i, Yt_model_i, nB_M2, dt_M2, nA_in, con_A_M2, con_b_M2);	% parameter estimation
-	[Yt_model_M2] = tf_ARX_pred_inc (Ut_model_i, A_M2, B_M2, zeros(1,n_var), Yt_model);
-	[Yv_model_M2] = tf_ARX_pred_inc (Uv_model_i, A_M2, B_M2, zeros(1,n_var), Yv_model);
-elseif toggle_inc == 0;	% absolute model
-	[B_M2 A_M2] = QP_ARX_MISO (Ut_model, Yt_model, nB_M2, dt_M2, con_A_M2, con_b_M2);	% parameter estimation
-	[Yt_model_M2] = tf_ARX_pred (Ut_model, A_M2, B_M2, zeros(1,n_var));
-	[Yv_model_M2] = tf_ARX_pred (Uv_model, A_M2, B_M2, zeros(1,n_var));
-end
+[B_M2 A_M2] = QP_ARX_MISO (Ut_model_i, Yt_model_i, nB_M2, dt_M2, nA_in, con_A_M2, con_b_M2);	% parameter estimation
+[Yt_model_M2] = tf_ARX_pred_inc (Ut_model_i, A_M2, B_M2, zeros(1,n_var), Yt_model);
+[Yv_model_M2] = tf_ARX_pred_inc (Uv_model_i, A_M2, B_M2, zeros(1,n_var), Yv_model);
 
 % Model accuracy
 if toggle_ascale == 1;	% if auto-scaling is used, convert to Eng units
@@ -113,7 +102,7 @@ end
 
 % M3: CON2: Constrained (quadprog, specify: K_sign min_phase)
 % set up constraints
-K_sign_M3 = [1 1 0];			% specify sign direction vector
+K_sign_M3 = [1 1 -1];			% specify sign direction vector
 min_phase_M3 = ones(1,n_var+1);	% 0 = not minimum phase
 % dt_M3 = zeros(1,n_var);			% specify a priori dead-time
 dt_M3 = [10 5];
@@ -123,16 +112,9 @@ nZ_M3 = [nB_M3 nA_in];
 [con_A_M3 con_b_M3] = CMI_con(nZ_M3, K_sign_M3, min_phase_M3);
 
 % Model Identification and Output Prediction
-if toggle_inc == 1;		% incremental model
-	[B_M3 A_M3] = QP_ARX_MISO (Ut_model_i, Yt_model_i, nB_M3, dt_M3,  nA_in, con_A_M3, con_b_M3);	% parameter estimation
-	[Yt_model_M3] = tf_ARX_pred_inc (Ut_model_i, A_M3, B_M3, zeros(1,n_var), Yt_model);
-	[Yv_model_M3] = tf_ARX_pred_inc (Uv_model_i, A_M3, B_M3, zeros(1,n_var), Yv_model);
-elseif toggle_inc == 0;	% absolute model
-	[B_M3] = QP_ARX_MISO (Ut_model, Yt_model, nB_M3, dt_M3, nA_in, con_A_M3, con_b_M3);	% parameter estimation
-	[Yt_model_M3] = tf_ARX_pred (Ut_model, A_M3, B_M3, zeros(1,n_var));
-	[Yv_model_M3] = tf_ARX_pred (Uv_model, A_M3, B_M3, zeros(1,n_var));
-
-end
+[B_M3 A_M3] = QP_ARX_MISO (Ut_model_i, Yt_model_i, nB_M3, dt_M3,  nA_in, con_A_M3, con_b_M3);	% parameter estimation
+[Yt_model_M3] = tf_ARX_pred_inc (Ut_model_i, A_M3, B_M3, zeros(1,n_var), Yt_model);
+[Yv_model_M3] = tf_ARX_pred_inc (Uv_model_i, A_M3, B_M3, zeros(1,n_var), Yv_model);
 
 % Model accuracy
 if toggle_ascale == 1;	% if auto-scaling is used, convert to Eng units
