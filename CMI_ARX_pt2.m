@@ -4,8 +4,8 @@
 
 % variables from earlier parts: n_var, n_coeff, K, tau, dt
 
-n_sam_t = 400; % number of samples in training dataset
-n_sam_v = 500; % number of samples in validation dataset
+n_sam_t = 200; % number of samples in training dataset
+n_sam_v = 300; % number of samples in validation dataset
 
 Ut = zeros(n_sam_t, n_var);
 Uv = zeros(n_sam_v, n_var);	
@@ -15,7 +15,7 @@ SNR = 10;	% specify level of noise to add (only applies if toggle is set)
 
 %Define input steps
 for i_var = 1:n_var
-	Ut(:,i_var) = RS(n_sam_t, 0, 1, floor(0.5*nB(i_var)), ceil(1.5*nB(i_var)));
+	Ut(:,i_var) = RS(n_sam_t, 0, 1, floor(1*nB(i_var)), ceil(2*nB(i_var)));
 	Uv(:,i_var) = RS(n_sam_v, 0, 1, nB(i_var), nB(i_var));
 end
 

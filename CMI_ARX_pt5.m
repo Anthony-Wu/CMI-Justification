@@ -176,6 +176,25 @@ for i_var = 1:n_var
 	xlim([0.5 nB_in(i_var)+0.5]);
 end
 
+% autoregression coefficients
+i_plot = i_plot + 1;
+figure (i_plot);
+bar_ref = bar([A{1}, A_M1{1}, A_M2{1}, A_M3{1}]);
+title(sprintf('ARX auto-regression coefficients',i_var),'FontWeight','bold'); % add title
+bar_ref(1).FaceColor = colour_true;
+bar_ref(1).BarWidth = 1.0;
+bar_ref(2).FaceColor = colour_M1;
+bar_ref(2).BarWidth = 1.0;
+bar_ref(3).FaceColor = colour_M2;
+bar_ref(3).BarWidth = 1.0;	
+bar_ref(4).FaceColor = colour_M3;
+bar_ref(4).BarWidth = 1.0;	
+
+legend('Actual','UNC','CON1','CON2');
+xlabel('Coefficient number','FontWeight','bold') % x-axis label
+ylabel('Value','FontWeight','bold') % y-axis label
+xlim([0.5 nA_in+0.5]);
+
 % plot Yt_model
 i_plot = i_plot +1;
 figure (i_plot);

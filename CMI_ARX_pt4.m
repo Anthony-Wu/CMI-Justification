@@ -2,7 +2,7 @@
 % Justification for constrained model identification - FIR models
 % part 4: Model identification
 
-nB_in = [50 50 50];
+nB_in = [30 30];
 for i_var = 1:n_var;
 	B_true{i_var} = [B{i_var}; zeros(nB_in(i_var) - length(B{i_var}),1)]; % erase this is not longer needed, replaced by mv
 	if toggle_ascale == 1;
@@ -38,14 +38,14 @@ end
 		
 % M1: UNC1: Unconstrained using WaterMV
 % Parameter estimation carried out in WaterMV, coefficients c/p here
-B_M1nz{1} = [-3.522005E-7	-2.9537256E-7	-2.4728087E-7	-7.4914915E-8	-1.4716596E-7	-1.9787508E-7	5.6318083E-8	1.7204042E-7	4.968644E-7	3.6311468E-7	1.5447766E-7	-1.9190325E-7	1.4244865E-9	5.193836E-7	7.258231E-7	5.0774446E-7	8.058068E-7	8.006897E-7	6.6031913E-7	8.0789937E-7	6.6456624E-7	5.913621E-7	7.5268383E-7	1.3702745E-6	1.316995E-6	1.3792649E-6	1.5323054E-6	1.3996022E-6	1.5824663E-6	0.17074963	0.12974167	0.09194646	0.07563061	0.06437585	0.056681916	0.050568826	0.045456342	0.040998664	0.03704098	-0.029322889	-0.017434401	-0.006417558	-0.0030257558	-0.0012454562	-5.502521E-4	-2.334995E-4	-1.00897385E-4	-4.2616368E-5	-1.781542E-5	-6.9715506E-6]';	% c/p coefficients from WaterMV as appropriate
-B_M1nz{2} = [1.5623965E-7	2.5196988E-7	1.7826625E-7	-1.6691494E-7	-2.0464809E-7	4.3818753E-9	1.9285628E-7	3.3627487E-7	3.076991E-8	0.042688817	0.03243659	0.02298721	0.01890826	0.01609411	0.01417069	0.012642338	0.011363721	0.010249302	0.009259719	-0.007331802	-0.0043593883	-0.0016054588	-7.5696135E-4	-3.120041E-4	-1.3816524E-4	-5.8753823E-5	-2.5624844E-5	-1.1152956E-5	-5.4303027E-6	-2.593879E-6	-1.5233545E-6	-7.01108E-7	-5.470957E-7	-4.015664E-7	-3.896105E-8	-2.7073952E-7	-1.2310782E-7	8.3230496E-8	4.538303E-8	-9.683473E-8	-4.875315E-7	-4.0134125E-7	-4.011392E-7	-4.324527E-8	1.1676137E-7	1.6064482E-7	3.9354418E-9	5.7996676E-8	1.2635216E-7	-2.5209104E-7]';
-B_M1nz{3} = [8.8003425E-8	3.7003707E-7	3.3904678E-7	5.818518E-7	6.3974807E-7	6.9289314E-7	7.3613154E-7	7.089389E-7	6.790159E-7	4.6268366E-7	5.766591E-7	7.054822E-7	8.504472E-7	7.633454E-7	1.1323505E-6	1.2282349E-6	1.0426762E-6	1.0752252E-6	1.2536007E-6	-0.085270636	-0.064790696	-0.045915812	-0.037768144	-0.032147665	-0.028305406	-0.025252193	-0.022699224	-0.02047302	-0.01849636	0.014645749	0.008708139	0.0032063436	0.0015119048	6.227476E-4	2.756567E-4	1.1743641E-4	5.1134928E-5	2.1625283E-5	8.757394E-6	3.6722572E-6	1.3149735E-6	2.3460905E-7	3.3929854E-8	-3.591528E-8	-4.3598916E-7	-4.5711968E-7	-4.82455E-7	-5.4154685E-7	-2.5697423E-7	2.6283823E-7]';
+B_M1nz{1} = [4.0602956E-8	9.544616E-8	1.9004692E-7	1.9277677E-7	2.545831E-7	3.0050276E-7	2.715955E-7	3.0153683E-7	3.2304686E-7	0.0845655	0.08004317	0.073393695	0.07000753	0.067113966	0.06469593	0.062471442	0.060380884	0.058382478	0.05646055	-0.005987558	-0.0045387954	-0.0015063493	-7.549232E-4	-3.0142855E-4	-1.355284E-4	-5.698552E-5	-2.468315E-5	-1.0351333E-5	-4.254277E-6	-1.6373056E-6]';	% c/p coefficients from WaterMV as appropriate
+B_M1nz{2} = [-6.690077E-8	-5.6318093E-8	-6.324389E-9	7.3003754E-9	0.061370354	0.054260135	0.046175323	0.041069977	0.03672721	0.03307412	0.029851656	0.026980093	0.024398932	0.022071294	-0.0026085938	-0.0018940879	-6.3970604E-4	-3.1737742E-4	-1.2748322E-4	-5.725073E-5	-2.419282E-5	-1.054802E-5	-4.51672E-6	-2.0088546E-6	-9.5111284E-7	-4.3632437E-7	-2.6927898E-7	-1.5663855E-7	-9.331918E-8	-6.301523E-8]';
+%B_M1nz{3} = [-1.7058079E-6	-3.5796213E-6	-1.9182355E-6	-2.2785678E-6	0.10811276	0.09417671	0.07973014	0.07068096	0.06311351	0.056792792	0.05124112	0.046306983	0.041870568	0.037874434	-0.005506495	-0.0036425316	-0.001281566	-6.225813E-4	-2.5240966E-4	-1.15536444E-4	-5.194282E-5	-2.3937884E-5	-9.318589E-6	-5.3212316E-6	-3.3944075E-6	-3.0280764E-6	-1.74369E-6	-1.4976952E-6	6.255219E-7	2.1069493E-6]';
 
-A_M1nz{1} = [-0.124965094	-0.22004129]';
+A_M1nz{1} = [-0.077233404	-0.14346129]';
 B_M1{1} = [[B_M1nz{1}]' zeros(1,nB_in(1) - length(B_M1nz{1}))]';
 B_M1{2} = [[B_M1nz{2}]' zeros(1,nB_in(2) - length(B_M1nz{2}))]';
-B_M1{3} = [[B_M1nz{3}]' zeros(1,nB_in(3) - length(B_M1nz{3}))]';
+%B_M1{3} = [[B_M1nz{3}]' zeros(1,nB_in(3) - length(B_M1nz{3}))]';
 A_M1{1} = [[A_M1nz{1}]' zeros(1,nA_in(1) - length(A_M1nz{1}))]';
 
 dt_M1 = zeros(1,n_var);			% specify a priori dead-time
@@ -78,9 +78,10 @@ end
 
 % M2: CON1: Constrained (quadprog, specify: K_sign)
 % set up constraints [B A]
-K_sign_M2 = [1 1 -1 0];				% specify sign direction vector
+K_sign_M2 = [1 1 0];				% specify sign direction vector
 min_phase_M2 = zeros(1,n_var+1);	% 0 = not minimum phase
-dt_M2 = zeros(1,n_var);				% specify a priori dead-time
+% dt_M2 = zeros(1,n_var);				% specify a priori dead-time
+dt_M2 = [10 5];				% specify a priori dead-time
 nB_M2 = nB_in - dt_M2;
 
 nZ_M2 = [nB_M2 nA_in];
@@ -89,12 +90,12 @@ nZ_M2 = [nB_M2 nA_in];
 % Model Identification and Output Prediction
 if toggle_inc == 1;		% incremental model
 	[B_M2 A_M2] = QP_ARX_MISO (Ut_model_i, Yt_model_i, nB_M2, dt_M2, nA_in, con_A_M2, con_b_M2);	% parameter estimation
-	[Yt_model_M2] = tf_ARX_pred_inc (Ut_model_i, A_M2, B_M2, dt_M2, Yt_model);
-	[Yv_model_M2] = tf_ARX_pred_inc (Uv_model_i, A_M2, B_M2, dt_M2, Yv_model);
+	[Yt_model_M2] = tf_ARX_pred_inc (Ut_model_i, A_M2, B_M2, zeros(1,n_var), Yt_model);
+	[Yv_model_M2] = tf_ARX_pred_inc (Uv_model_i, A_M2, B_M2, zeros(1,n_var), Yv_model);
 elseif toggle_inc == 0;	% absolute model
 	[B_M2 A_M2] = QP_ARX_MISO (Ut_model, Yt_model, nB_M2, dt_M2, con_A_M2, con_b_M2);	% parameter estimation
-	[Yt_model_M2] = tf_ARX_pred (Ut_model, A_M2, B_M2, dt_M2);
-	[Yv_model_M2] = tf_ARX_pred (Uv_model, A_M2, B_M2, dt_M2);
+	[Yt_model_M2] = tf_ARX_pred (Ut_model, A_M2, B_M2, zeros(1,n_var));
+	[Yv_model_M2] = tf_ARX_pred (Uv_model, A_M2, B_M2, zeros(1,n_var));
 end
 
 % Model accuracy
@@ -112,25 +113,24 @@ end
 
 % M3: CON2: Constrained (quadprog, specify: K_sign min_phase)
 % set up constraints
-K_sign_M3 = [1 1 -1 0];			% specify sign direction vector
+K_sign_M3 = [1 1 0];			% specify sign direction vector
 min_phase_M3 = ones(1,n_var+1);	% 0 = not minimum phase
-dt_M3 = zeros(1,n_var);			% specify a priori dead-time
+% dt_M3 = zeros(1,n_var);			% specify a priori dead-time
+dt_M3 = [10 5];
 nB_M3 = nB_in - dt_M3;
 
 nZ_M3 = [nB_M3 nA_in];
 [con_A_M3 con_b_M3] = CMI_con(nZ_M3, K_sign_M3, min_phase_M3);
 
-%%%%%%%%%% CONTINUE FROM HERE!!!!
-
 % Model Identification and Output Prediction
 if toggle_inc == 1;		% incremental model
 	[B_M3 A_M3] = QP_ARX_MISO (Ut_model_i, Yt_model_i, nB_M3, dt_M3,  nA_in, con_A_M3, con_b_M3);	% parameter estimation
-	[Yt_model_M3] = tf_ARX_pred_inc (Ut_model_i, A_M3, B_M3, dt_M3, Yt_model);
-	[Yv_model_M3] = tf_ARX_pred_inc (Uv_model_i, A_M3, B_M3, dt_M3, Yv_model);
+	[Yt_model_M3] = tf_ARX_pred_inc (Ut_model_i, A_M3, B_M3, zeros(1,n_var), Yt_model);
+	[Yv_model_M3] = tf_ARX_pred_inc (Uv_model_i, A_M3, B_M3, zeros(1,n_var), Yv_model);
 elseif toggle_inc == 0;	% absolute model
 	[B_M3] = QP_ARX_MISO (Ut_model, Yt_model, nB_M3, dt_M3, nA_in, con_A_M3, con_b_M3);	% parameter estimation
-	[Yt_model_M3] = tf_ARX_pred (Ut_model, A_M3, B_M3, dt_M3);
-	[Yv_model_M3] = tf_ARX_pred (Uv_model, A_M3, B_M3, dt_M3);
+	[Yt_model_M3] = tf_ARX_pred (Ut_model, A_M3, B_M3, zeros(1,n_var));
+	[Yv_model_M3] = tf_ARX_pred (Uv_model, A_M3, B_M3, zeros(1,n_var));
 
 end
 
