@@ -24,7 +24,7 @@ function [B, A] = QP_ARX_MISO (U, y, nB, dt, nA, con_A, con_b)
 	end
 	
 	% ARX part
-	X_y = spreaddwn(shiftdwn(y,1),nA); 
+	X_y = -spreaddwn(shiftdwn(y,1),nA); 
 	
 	% Combined X matrix
 	X = [X_u, X_y]; 
@@ -33,13 +33,14 @@ function [B, A] = QP_ARX_MISO (U, y, nB, dt, nA, con_A, con_b)
 	paras = zeros(sum(nB)+nA,1);
 	paras0 = zeros(sum(nB)+nA,1);
 	
-	H = 2*X'*X;
-	f = -2*X'*y;
+	H = 2*(X'*X);
+	f = -2*(X'*y);
 	
+	options = optimoptions('quadprog','OptimalityTolerance',1e-8,'MaxIterations',1000');
 	if 	(isempty(con_A) + isempty(con_b)) > 0;	% if either part of the inequality constraints is not specified
-		paras = quadprog(H,f,[],[],[],[],[],[],paras0);
+		paras = quadprog(H,f,[],[],[],[],[],[],paras0,options);
 	else
-		paras = quadprog(H,f,con_A,con_b,[],[],[],[],paras0);
+		paras = quadprog(H,f,con_A,con_b,[],[],[],[],paras0,options);
 	end
 	
 	% reformat results to cell array
@@ -48,5 +49,5 @@ function [B, A] = QP_ARX_MISO (U, y, nB, dt, nA, con_A, con_b)
 		B{i_var} = [zeros(dt(i_var),1);[paras(bkmk+1:bkmk+nB(i_var))]];
 		bkmk = bkmk + nB(i_var);
 	end
-		A{1} = -paras(bkmk+1:end);
+		A{1} = paras(bkmk+1:end);
 end
